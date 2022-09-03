@@ -9,6 +9,7 @@ class Solution:
         inorder_map = {}
         for i, n in enumerate(inorder):
             inorder_map[n] = i
+        # To be able to build the tree from the root, we've to start from the right end of `postorder`
         self.postorder_idx = -1
         
         def build(start, end):
@@ -16,7 +17,9 @@ class Solution:
             rootVal = postorder[self.postorder_idx]
             self.postorder_idx -= 1
             root = TreeNode(rootVal)
+            # Build the right subtree first
             root.right = build(inorder_map[rootVal]+1, end)
+            # And then the left subtree
             root.left = build(start, inorder_map[rootVal]-1)            
             return root
             
