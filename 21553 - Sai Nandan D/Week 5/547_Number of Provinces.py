@@ -18,7 +18,7 @@ class Solution:
             if x != y:
                 if rank[x] > rank[y]:
                     parent[y] = x
-                elif rank[y] > rank[y]:
+                elif rank[y] > rank[x]:
                     parent[x] = y
                 else:
                     parent[y] = x
