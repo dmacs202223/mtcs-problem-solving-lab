@@ -1,3 +1,21 @@
+# Approach 1: Floyd-Warshall
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        n = len(values)
+        
+        q = defaultdict(dict)                
+        for (a, b), v in zip(equations, values):            
+            q[a][b] = v
+            q[b][a] = 1/v
+            
+        for k in q:
+            for a in q[k]:
+                for b in q[k]:
+                    q[a][b] = q[a][k] * q[k][b]
+                    
+        return [q[a].get(b, -1.0) for a, b in queries]
+
+# Approach 2: DFS
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         
